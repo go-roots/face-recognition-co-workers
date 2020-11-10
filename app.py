@@ -63,6 +63,8 @@ def loadImages():
             #Put NULL in the img
             ENCODED_USR_IMG.append({'user':x['user'], 'img':'null'})
 
+        os.remove(src)
+
     #To test the encoding
     #print("ENCODED_USR_IMG - loadImg", file=sys.stderr)
     #print(ENCODED_USR_IMG, file=sys.stderr)
