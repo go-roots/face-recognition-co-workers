@@ -8,7 +8,8 @@ The WebService was built using Flask which is the simplest Web Framework.
 This WebService is runed in a Docker Container to avoid the constraint linked to the Face Recognition Library  
 
 ## Why not use a ready to go service ?
-
+This would have greatly simplified the work however no free Webservice coresponded to our needs.  
+The most know one AWS needed credential and the number of free request was limited and the option to have a database of faces
 
 
 ## Usages  
