@@ -25,6 +25,11 @@ Run the WebService on localhost:5000
 ```shell
 docker run -d -p 5000:5000 face-recognition-co-workers:init
 ```
+Or if you are familiar with docker (https://hub.docker.com/repository/docker/paul325/face-recognition-co-workers)
+```shell
+docker pull paul325/face-recognition-co-workers:fix
+```
+
 
 # Why not use a ready to go service ?
 This would have greatly simplified the work however no free Webservice coresponded to our needs.  
