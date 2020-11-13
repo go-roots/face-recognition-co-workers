@@ -9,8 +9,12 @@ This WebService is runed in a Docker Container to avoid the constraint linked to
 
 ## Why not use a ready to go service ?
 This would have greatly simplified the work however no free Webservice coresponded to our needs.  
-The most know one AWS needed credential and the number of free request was limited and the option to have a database of faces
+The most know one AWS needed credential and the number of free request was limited and the option to have a database of faces was not that accessible.  
+In the end if we choose a "free" ready to go service we should have spent a lot of time configuring.  
 
+We decided to go with the most interesting option by creating one
+
+## Flask Webservice  
 
 ## Usages  
 The web service for Face Recognition   
