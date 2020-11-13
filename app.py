@@ -124,7 +124,7 @@ def update_position(room, user_list):
         #print(status, file=sys.stderr)
         if status == "Unavailable":
             #print("Changing avaiabilty", file=sys.stderr)
-            request.put("https://co-workers.herokuapp.com/api/cw-api/profiles/status/"+i['user'], headers={'Authorization': 'Bearer '+TOKEN}, json={"status": "Available"})
+            requests.put("https://co-workers.herokuapp.com/api/cw-api/profiles/status/"+i['user'], headers={'Authorization': 'Bearer '+TOKEN}, json={"status": "Available"})
         pass
 
     endpoint = "https://co-workers.herokuapp.com/api/cw-api/rooms/moveIn/" + room
