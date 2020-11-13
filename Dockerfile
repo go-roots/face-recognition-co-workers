@@ -1,7 +1,7 @@
-# This is a sample Dockerfile you can modify to deploy your own app based on face_recognition
-
+# Ask for a python env
 FROM python:3.6-slim-stretch
 
+#Run the command to setup the env
 RUN apt-get -y update
 RUN apt-get install -y --fix-missing \
     build-essential \
@@ -26,6 +26,7 @@ RUN apt-get install -y --fix-missing \
     zip \
     && apt-get clean && rm -rf /tmp/* /var/tmp/*
 
+#Import the dependencies of Face-Recognition
 RUN cd ~ && \
     mkdir -p dlib && \
     git clone -b 'v19.9' --single-branch https://github.com/davisking/dlib.git dlib/ && \
@@ -33,15 +34,15 @@ RUN cd ~ && \
     python3 setup.py install --yes USE_AVX_INSTRUCTIONS
 
 
-
-# The rest of this file just runs an example script.
-
-# If you wanted to use this Dockerfile to run your own app instead, maybe you would do this:
+#Load the files
 COPY . /app
 
+#Setup the workdir
 WORKDIR /app
 
+#Install the app.py dependencies
 RUN pip install -r requirements.txt 
 
+#Run the WebService
 ENTRYPOINT ["python"]
 CMD ["app.py"]

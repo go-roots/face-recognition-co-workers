@@ -25,8 +25,11 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 ENCODED_USR_IMG = []
 
 #Token to use the Go-Roots API
-TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkN2E1MTRiNWQyYzEyYzc0NDliZTA0NiIsImlhdCI6MTYwNDQxMTkzMiwiZXhwIjoxNjA5NTk1OTMyfQ.9cQCiTr0BTcbciw5iPxNz-2S2SKflfR9hPJ4Zu7n728"
-
+getToken = requests.post('https://co-workers.herokuapp.com/api/cw-api/auth/login', json={"email" : "admin@gmail.com","password": "testtest"})
+TOKEN = getToken.json()['token']
+#TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkN2E1MTRiNWQyYzEyYzc0NDliZTA0NiIsImlhdCI6MTYwNDQxMTkzMiwiZXhwIjoxNjA5NTk1OTMyfQ.9cQCiTr0BTcbciw5iPxNz-2S2SKflfR9hPJ4Zu7n728"
+print(type(TOKEN), file=sys.stderr)
+print(TOKEN, file=sys.stderr)
 #Load and encrypt the images of the DB
 def loadImages():
     print("Loading the files", file=sys.stderr)
@@ -63,7 +66,6 @@ def loadImages():
             #Put NULL in the img
             ENCODED_USR_IMG.append({'user':x['user'], 'img':'null'})
 
-        os.remove(src)
 
     #To test the encoding
     #print("ENCODED_USR_IMG - loadImg", file=sys.stderr)
@@ -107,15 +109,28 @@ def find_users_in_image(file_stream):
     
 #Update the position based on identification
 def update_position(room, user_list):
+    
+    #Update the avaiability of the user
+    for i in user_list:
+        ##print("i c'est: ", file=sys.stderr)
+        #print(i['user'], file=sys.stderr)
+        statusReq = requests.get("https://co-workers.herokuapp.com/api/cw-api/profiles/user/" + i['user'], headers={'Authorization': 'Bearer '+TOKEN})
+        statusJson = statusReq.json()
+        #print("status c'est: ", file=sys.stderr)
+        #print(statusJson, file=sys.stderr)
+        #print("status c'est status: ", file=sys.stderr)
+        #print(statusJson['data']['status'], file=sys.stderr)
+        status = statusJson['data']['status']
+        #print(status, file=sys.stderr)
+        if status == "Unavailable":
+            #print("Changing avaiabilty", file=sys.stderr)
+            request.put("https://co-workers.herokuapp.com/api/cw-api/profiles/status/"+i['user'], headers={'Authorization': 'Bearer '+TOKEN}, json={"status": "Available"})
+        pass
+
     endpoint = "https://co-workers.herokuapp.com/api/cw-api/rooms/moveIn/" + room
     data = {"users" : user_list}
-    #header = {"Authorization": "Bearer "+TOKEN}
-    #print("endpoint", file=sys.stderr)
-    #print(endpoint, file=sys.stderr)
-    #print("data", file=sys.stderr)
-    #print(data, file=sys.stderr)
     r = requests.put(endpoint, headers={'Authorization': 'Bearer '+TOKEN}, json=data)
-    return r
+    return data
 
 
 @app.route('/', methods=['GET', 'POST'])
