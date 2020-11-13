@@ -37,8 +37,9 @@ Quite a few constraints have been balanced with this WebService.
 The Face-Recognition is quite heavy with a lot of dependencies and consume a lot of memory to run making it complicated to process complicate task for small computers such as Raspberry Pi.
 It only work on Unix environment set up with precise libraries so it was decided to use Docker to work with a stable environment.
 
-## Docker
-Docker is used like a recipe to tell the host how to configure the environment. It was almost mandatory 
+## Communication with the Co-Workers API
+The WebService work with the CO-Workers API (NodeJs) that handle security and ensure consistency in the DataBase. To connect this API a Admin Token is needed.  
+
 
 ## Usages  
 The web service for Face Recognition   
