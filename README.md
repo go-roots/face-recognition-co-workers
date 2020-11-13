@@ -43,11 +43,13 @@ The WebService work with the CO-Workers API (NodeJs) that handle security and en
 
 
 ## Usages  
+As the operation are very costly to not crash the WebService only handle a request at the time  
 The web service for Face Recognition   
 The web service is host on http://206.189.55.55/   
 It handle 2 route  
 
 ### GET http://206.189.55.55/
+![alt schema](https://user-images.githubusercontent.com/63868715/99016560-b55bb200-2557-11eb-8083-d966d7f53dbc.png)
 
 It load the image from the MongoDb database and encode them.   
 It is a costly operation and it is not needed to do it often.   
@@ -58,4 +60,5 @@ The query take ~30 seconds to answer
 This post request take in Parameter the <NAME of the ROOM\> that detected the faces.   
 It also take a img file which is the photo to process in the file of the HTTP request.
 It return the user who moved and to which room.
+The query take <1 second to answer
 
