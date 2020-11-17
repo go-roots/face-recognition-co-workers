@@ -1,5 +1,5 @@
 # face-recognition-co-workers
-By Shraddha, DaiQiao and Paul
+By DaiQiao and Paul
 
 # How it works ?
 The main core of this web service is the library provided by https://github.com/ageitgey/face_recognition  
